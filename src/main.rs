@@ -60,6 +60,29 @@ async fn main() {
 
             steam::exec_item().await;
         }
+        SubCommand::Update {
+            mod_id,
+            content,
+            thumbnail,
+            title,
+            description,
+            visibility,
+            ..
+        } => {
+            let workshopitem =
+                workshopitem::new(mod_id, content, thumbnail, title, description, visibility);
+
+            let content = vdf_serde::to_string(&workshopitem).unwrap();
+
+            if let Err(e) = fs::write(vdf_path(), &content) {
+                eprintln!("Uploader failed");
+                eprintln!("Unable to write a VDF: {}", e);
+
+                process::exit(1);
+            }
+
+            steam::exec_item().await;
+        }
         _ => {}
     }
 }
