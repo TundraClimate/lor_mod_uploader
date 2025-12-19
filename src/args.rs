@@ -6,7 +6,7 @@ use std::path::PathBuf;
 #[command(about = "Library of Ruina workshop publisher and updator")]
 pub struct Args {
     #[command(subcommand)]
-    command: SubCommand,
+    pub command: SubCommand,
 }
 
 #[derive(Subcommand)]

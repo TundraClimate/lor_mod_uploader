@@ -5,7 +5,7 @@ use std::process;
 
 mod args;
 
-use args::Args;
+use args::{Args, SubCommand};
 
 pub const LOR_ID: usize = 1256670;
 
@@ -21,7 +21,32 @@ fn main() {
         process::exit(1);
     }
 
-    let _ = Args::parse();
+    let args = Args::parse();
+
+    match args.command {
+        SubCommand::Login { user_id } => {}
+        SubCommand::New {
+            content,
+            thumbnail,
+            title,
+            description,
+        } => {}
+        SubCommand::Update {
+            mod_id,
+            content,
+            thumbnail,
+            title,
+            description,
+        } => {}
+        SubCommand::FromInfo {
+            mod_info,
+            mod_id,
+            content,
+            thumbnail,
+            title,
+            description,
+        } => {}
+    }
 }
 
 fn tmp_dir() -> PathBuf {
