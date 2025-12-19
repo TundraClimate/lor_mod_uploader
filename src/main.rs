@@ -5,10 +5,12 @@ use std::process;
 
 mod args;
 mod steam;
+mod vdf;
 
 use args::{Args, SubCommand};
+use vdf::workshopitem;
 
-pub const LOR_ID: usize = 1256670;
+pub const LOR_ID: u32 = 1256670;
 
 #[tokio::main]
 async fn main() {
@@ -41,22 +43,24 @@ async fn main() {
             thumbnail,
             title,
             description,
-        } => {}
-        SubCommand::Update {
-            mod_id,
-            content,
-            thumbnail,
-            title,
-            description,
-        } => {}
-        SubCommand::FromInfo {
-            mod_info,
-            mod_id,
-            content,
-            thumbnail,
-            title,
-            description,
-        } => {}
+            visibility,
+            ..
+        } => {
+            let workshopitem =
+                workshopitem::new(0, content, thumbnail, title, description, visibility);
+
+            let content = vdf_serde::to_string(&workshopitem).unwrap();
+
+            if let Err(e) = fs::write(vdf_path(), &content) {
+                eprintln!("Uploader failed");
+                eprintln!("Unable to write a VDF: {}", e);
+
+                process::exit(1);
+            }
+
+            steam::exec_item().await;
+        }
+        _ => {}
     }
 }
 

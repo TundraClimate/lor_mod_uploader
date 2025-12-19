@@ -7,6 +7,7 @@ edition = "2024"
 clap = { version = "4.5.53", features = ["derive"] }
 serde = { version = "1.0.228", features = ["derive"] }
 tokio = { version = "1.48.0", features = ["full"] }
+vdf-serde = "0.3.0"
 
 [[bin]]
 path = "src/main.rs"

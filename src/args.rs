@@ -23,6 +23,9 @@ pub enum SubCommand {
 
         #[arg(short = 'd', long = "desc")]
         description: String,
+
+        #[arg(short = 'v', long = "vis")]
+        visibility: u8,
     },
 
     Update {
@@ -39,6 +42,9 @@ pub enum SubCommand {
 
         #[arg(short = 'd', long = "desc")]
         description: String,
+
+        #[arg(short = 'v', long = "vis")]
+        visibility: u8,
     },
 
     FromInfo {
@@ -58,6 +64,9 @@ pub enum SubCommand {
 
         #[arg(short = 'd', long = "desc")]
         description: Option<String>,
+
+        #[arg(short = 'v', long = "vis")]
+        visibility: Option<u8>,
     },
 
     Login {
