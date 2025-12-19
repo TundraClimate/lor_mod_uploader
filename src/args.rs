@@ -59,4 +59,8 @@ pub enum SubCommand {
         #[arg(short = 'd', long = "desc")]
         description: Option<String>,
     },
+
+    Login {
+        user_id: String,
+    },
 }
