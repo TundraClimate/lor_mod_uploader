@@ -83,7 +83,9 @@ async fn main() {
 
             steam::exec_item().await;
         }
-        _ => {}
+        _ => {
+            todo!()
+        }
     }
 }
 
