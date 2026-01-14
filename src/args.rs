@@ -12,38 +12,38 @@ pub struct Args {
 #[derive(Subcommand)]
 pub enum SubCommand {
     New {
-        #[arg(short = 'C', long = "content", value_parser = value_parser!(PathBuf))]
+        #[arg(long = "content", value_parser = value_parser!(PathBuf))]
         content: PathBuf,
 
-        #[arg(short = 'p', long = "thumbnail", value_parser = value_parser!(PathBuf))]
+        #[arg(long = "thumbnail", value_parser = value_parser!(PathBuf))]
         thumbnail: PathBuf,
 
-        #[arg(short = 't', long = "title")]
+        #[arg(long = "title")]
         title: String,
 
-        #[arg(short = 'd', long = "desc")]
+        #[arg(long = "desc")]
         description: String,
 
-        #[arg(short = 'v', long = "vis")]
+        #[arg(long = "vis")]
         visibility: u8,
     },
 
     Update {
         mod_id: u32,
 
-        #[arg(short = 'C', long = "content", value_parser = value_parser!(PathBuf))]
+        #[arg(long = "content", value_parser = value_parser!(PathBuf))]
         content: PathBuf,
 
-        #[arg(short = 'p', long = "thumbnail", value_parser = value_parser!(PathBuf))]
+        #[arg(long = "thumbnail", value_parser = value_parser!(PathBuf))]
         thumbnail: PathBuf,
 
-        #[arg(short = 't', long = "title")]
+        #[arg(long = "title")]
         title: String,
 
-        #[arg(short = 'd', long = "desc")]
+        #[arg(long = "desc")]
         description: String,
 
-        #[arg(short = 'v', long = "vis")]
+        #[arg(long = "vis")]
         visibility: u8,
     },
 
@@ -53,19 +53,19 @@ pub enum SubCommand {
 
         mod_id: Option<u32>,
 
-        #[arg(short = 'C', long = "content", value_parser = value_parser!(PathBuf))]
+        #[arg(long = "content", value_parser = value_parser!(PathBuf))]
         content: Option<PathBuf>,
 
-        #[arg(short = 'p', long = "thumbnail", value_parser = value_parser!(PathBuf))]
+        #[arg(long = "thumbnail", value_parser = value_parser!(PathBuf))]
         thumbnail: Option<PathBuf>,
 
-        #[arg(short = 't', long = "title")]
+        #[arg(long = "title")]
         title: Option<String>,
 
-        #[arg(short = 'd', long = "desc")]
+        #[arg(long = "desc")]
         description: Option<String>,
 
-        #[arg(short = 'v', long = "vis")]
+        #[arg(long = "vis")]
         visibility: Option<u8>,
     },
 
