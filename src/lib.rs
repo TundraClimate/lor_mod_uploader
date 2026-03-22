@@ -26,7 +26,7 @@ impl UpdateEntry {
     ) -> Option<Self> {
         Some(Self {
             title,
-            desc,
+            desc: desc.replace("\\n", "\n"),
             thumbnail_path: thumbnail.canonicalize().ok()?,
             content_path: content.canonicalize().ok()?,
             visibility,
