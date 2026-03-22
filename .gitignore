@@ -1,1 +1,5 @@
 /target
+/lib
+
+publish.sh
+loruploader
