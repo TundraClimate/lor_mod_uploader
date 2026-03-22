@@ -45,6 +45,10 @@ async fn main() {
         return;
     };
 
+    println!("$WORKSHOP_TITLE suggested");
+    println!("$WORKSHOP_DESC suggested");
+    println!("$WORKSHOP_THUMBNAIL suggested");
+
     let Ok(client) = Client::init() else {
         eprintln!("Steam client not launched");
 
@@ -54,9 +58,15 @@ async fn main() {
     let ugc = client.ugc();
     let wait = Arc::new(AtomicBool::new(false));
 
-    let item_id = option_env!("WORKSHOP_ID")
-        .and_then(|tid| tid.parse::<u64>().ok())
-        .unwrap_or(0);
+    let item_id = option_env!("WORKSHOP_ID");
+
+    if item_id.is_none() {
+        eprintln!("$WORKSHOP_ID is not suggested");
+    }
+
+    let item_id = item_id.and_then(|tid| tid.parse::<u64>().ok()).unwrap_or(0);
+
+    println!("Using WORKSHOP_ID is {}", item_id);
 
     let wait_cb = wait.clone();
 
