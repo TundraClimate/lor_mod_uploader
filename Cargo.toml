@@ -10,4 +10,4 @@ steamworks = "0.12.0"
 
 [[bin]]
 path = "src/main.rs"
-name = "loruploader"
+name = "loruploader_bin"
