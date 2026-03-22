@@ -12,42 +12,22 @@ use lor_mod_uploader::args::Args;
 
 pub const LOR_ID: u32 = 1256670;
 
-#[tokio::main]
-async fn main() {
+fn main() {
     let args = Args::parse();
 
-    let title = option_env!("WORKSHOP_TITLE");
-    let desc = option_env!("WORKSHOP_DESC");
-    let thumbnail_path = option_env!("WORKSHOP_THUMBNAIL");
-
     let Some(entry) = UpdateEntry::new(
-        title,
-        desc,
-        thumbnail_path,
+        args.title,
+        args.desc,
+        args.thumbnail_path,
         args.content_path,
         args.vis.into(),
         args.tags,
     ) else {
         eprintln!("Upload failed.");
-
-        if title.is_none() {
-            eprintln!("$WORKSHOP_TITLE is not suggested");
-        }
-
-        if desc.is_none() {
-            eprintln!("$WORKSHOP_DESC is not suggested");
-        }
-
-        if thumbnail_path.is_none() {
-            eprintln!("$WORKSHOP_THUMBNAIL is not suggested");
-        }
+        eprintln!("The paths is not absolute");
 
         return;
     };
-
-    println!("$WORKSHOP_TITLE suggested");
-    println!("$WORKSHOP_DESC suggested");
-    println!("$WORKSHOP_THUMBNAIL suggested");
 
     let Ok(client) = Client::init() else {
         eprintln!("Steam client not launched");
@@ -58,22 +38,18 @@ async fn main() {
     let ugc = client.ugc();
     let wait = Arc::new(AtomicBool::new(false));
 
-    let item_id = option_env!("WORKSHOP_ID");
-
-    if item_id.is_none() {
-        eprintln!("$WORKSHOP_ID is not suggested");
-    }
-
-    let item_id = item_id.and_then(|tid| tid.parse::<u64>().ok()).unwrap_or(0);
+    let item_id = args.id;
 
     println!("Using WORKSHOP_ID is {}", item_id);
 
     let wait_cb = wait.clone();
 
+    println!("Start Upload");
+
     let _handle = ugc
         .start_item_update(AppId(LOR_ID), PublishedFileId(item_id))
-        .title(entry.title)
-        .description(entry.desc)
+        .title(&entry.title)
+        .description(&entry.desc)
         .preview_path(&entry.thumbnail_path)
         .content_path(&entry.content_path)
         .visibility(entry.visibility)

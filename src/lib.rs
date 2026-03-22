@@ -7,8 +7,8 @@ use std::str::FromStr;
 use steamworks::PublishedFileVisibility;
 
 pub struct UpdateEntry {
-    pub title: &'static str,
-    pub desc: &'static str,
+    pub title: String,
+    pub desc: String,
     pub thumbnail_path: PathBuf,
     pub content_path: PathBuf,
     pub visibility: PublishedFileVisibility,
@@ -17,17 +17,17 @@ pub struct UpdateEntry {
 
 impl UpdateEntry {
     pub fn new(
-        title: Option<&'static str>,
-        desc: Option<&'static str>,
-        thumbnail: Option<&'static str>,
+        title: String,
+        desc: String,
+        thumbnail: PathBuf,
         content: PathBuf,
         visibility: PublishedFileVisibility,
         tags: Vec<String>,
     ) -> Option<Self> {
         Some(Self {
-            title: title?,
-            desc: desc?,
-            thumbnail_path: PathBuf::from(thumbnail?).canonicalize().ok()?,
+            title,
+            desc,
+            thumbnail_path: thumbnail.canonicalize().ok()?,
             content_path: content.canonicalize().ok()?,
             visibility,
             tags,

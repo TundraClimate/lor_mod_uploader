@@ -2,18 +2,28 @@
 
 ## HOW TO USE
 
-This softwere reads the `WORKSHOP_TITLE`, `WORKSHOP_DESC`, `WORKSHOP_THUMBNAIL` and `WORKSHOP_ID`.
-
 ```
 Library of Ruina workshop publisher and updator
 
-Usage: loruploader [OPTIONS] <CONTENT_PATH>
+Usage: loruploader [OPTIONS] <TITLE> <DESC> <THUMBNAIL_PATH> <CONTENT_PATH>
 
 Arguments:
+  <TITLE>
+          A title of workshop item
+
+  <DESC>
+          A description of workshop item
+
+  <THUMBNAIL_PATH>
+          A path of the thumbnail
+
   <CONTENT_PATH>
           A path of the publish target
 
 Options:
+      --id <ID>
+          [default: 0]
+
   -v <VIS>
           Specify workshop visibility
 
