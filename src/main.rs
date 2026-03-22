@@ -29,7 +29,7 @@ fn main() {
         return;
     };
 
-    let Ok(client) = Client::init() else {
+    let Ok(client) = Client::init_app(LOR_ID) else {
         eprintln!("Steam client not launched");
 
         return;
